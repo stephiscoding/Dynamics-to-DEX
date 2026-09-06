@@ -43,7 +43,6 @@ def process_excel(file_name):
         month = datetime.date(session_date).month
 
         # convert the event to the event code, prompting the user for a case code if it does not yet exist
-        # this is a garbage way of doing this, but it does work
         # essentially, we want to let the user create whatever code they want for an event. as the same event might exist under seperate names in CRM, we let them add duplicates with a warning.
         related_event = row["Related Event"]
         new_code = ""
@@ -144,7 +143,7 @@ for month in cases:
         
         # begin adding clients to the case
         client_case_count = 0
-        seen_clients = set() # a set is just a faster list
+        seen_clients = set()
         case_clients_elem = ET.SubElement(case_elem, "CaseClients")
         for session, date, client in cases[month][case][1]:
             # if the client is not already in of the case, add them. otherwise, go to the next client
